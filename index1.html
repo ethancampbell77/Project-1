@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project1-Crave</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link href="assests/css/style1.css" type="text/css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Crave</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms div -->
+        <div class="row">
+            <div class="col-6">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="search" placeholder="What are you craving for?"
+                            maxlength="50" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-4">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="zip" placeholder="Zipcode" maxlength="5" required>
+                    </div>
+                </form>
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div><br>
+        <!-- table div -->
+        <div class="row">
+            <div class="col-12">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Recent Searches</th>
+                                    <th scope="col">Zipcode</th>
+                                </tr>
+                            </thead>
+                            <tbody id="search">
+                                <!-- Trains will be listed here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+
+        <!-- Restaurants/Recipes div -->
+        <div class="row">
+            <div class="col-4" id="restaurants">
+                Restaurants
+            </div>
+
+            <div class="col-6" id="recipes">
+                Recipes
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
