@@ -11,8 +11,8 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- Compiled and minified jQuery -->
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <link href="assests/css/style.css" type="text/css" rel="stylesheet">
 </head>
@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="header"> <!-- "was card-panel" -->
                     <!-- <img class="img" src="assests/images/food.jpg"> -->
-                    <h2>Crave</h2>
+                    <h2>Krave</h2>
                 </div>
             </div>
         </div>
@@ -33,14 +33,13 @@
                 <div class="row">
                     <div class="input-field col s5">
                         <i class="material-icons prefix">keyboard</i>
-                        <input id="search" type="text" placeholder="What are you craving for?" class="validate"
-                            required />
+                        <input id="search" type="text" placeholder="What are you craving for?">
                     </div>
 
                     <div class="input-field col s5">
-                        <input id="zipcode" type="text" placeholder="Zipcode" class="validate" required />
+                        <input id="zipcode" type="text" placeholder="Zipcode">
                     </div>
-                    <button class="btn waves-default" type="submit" name="action">Submit
+                    <button class="btn waves-default" id="submit" type="button" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
@@ -67,10 +66,16 @@
             </div>
 
             <div class="col s6" id="recipes">
-                Recipes
+                How to make?
             </div>
+            <div id="player"></div>
         </div>
     </div>
+    <!-- Compiled and minified JavaScript -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 </body>
 
 </html>
