@@ -46,5 +46,8 @@ h1{
     font-family: 'Times New Roman', Times, serif;
 }
 
-
+.table {
+    margin: auto;
+    width: 30% !important; 
+ }
 
