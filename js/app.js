@@ -189,10 +189,30 @@ database.ref().on("child_added", function (childSnapshot) {
         resetForm();
     }
 
-        // Start of resturant search and display
-function restaurant(){
-// call google api to search for resturants
-$("#restaurants").empty();
+// clear the form values after values have been stored
+function resetForm() {
+    document.getElementById("search").value = "";
+    document.getElementById("zip").value = "";
+
+}
+
+ function lngLat (){
+
+    zip = $("#zip").val()
+        $.ajax({
+           url : "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:" + zip + "&sensor=false&key=AIzaSyA6N-1it5aWPiccey5v0jP30BI9HAlZVME",
+           method: "GET",
+        }).then(function(data){
+               latitude = data.results[0].geometry.location.lat;
+               longitude= data.results[0].geometry.location.lng;
+           
+        }
+        )};
+    
+        function restaurant(){l
+           
+            // call google api to search for resturants
+            $("#restaurants").empty();
         var input = $("#search").val().trim();
         console.log(input);
         var apiKey = "&key=AIzaSyC-eggb7gTlK5ThaxuAyyXs6jqXZ92fXk0";
