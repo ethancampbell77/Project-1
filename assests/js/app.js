@@ -1,24 +1,9 @@
+
 function loadPlayer() {
     window.onYouTubePlayerAPIReady = function () {
         onYouTubePlayer();
     };
 }
-
-// this function takes the zip code and changes it to longitutde and lattitdue for resurant search
-
-function lonlat() {
-    var input = $("#zip").val().trim();
-
-    var xhr = $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + input + "&key=AIzaSyA6N-1it5aWPiccey5v0jP30BI9HAlZVME");
-
-    xhr.done(function (data) {
-        latitude = data.results[0].geometry.location.lat;
-        longitude = data.results[0].geometry.location.lng;
-
-    });
-
-}
-
 //Set the firebase configuration
 
 var config = {
@@ -41,8 +26,7 @@ $(document).ready(function () {
         console.log("Search Term: " + childSnapshot.val().search);
         console.log("Zip: " + childSnapshot.val().zip);
 
-        // var vidLink = "https://www.youtube.com/watch?v=" & vidId;
-
+        // var vidLink = "https://www.youtube.com/watch?v=" & vidId
 
         // Search results are appended to the table
         $("#resultsTable").append(
@@ -55,6 +39,7 @@ $(document).ready(function () {
         );
         // First 5 searches are presented in the table
         $('table tr:gt(5)').hide();
+
 
 
     }, function (errorObject) {
@@ -81,17 +66,11 @@ $("#submit").on("click", function (event) {
     // console log the values that were just pushed to the database
     console.log(recentSearch.search);
     console.log(recentSearch.zip);
+
+
+    console.log(zip);
     // call function wait() to load videos based on the search term
     wait();
-
-    lngLat();
-    console.log(zip);
-    console.log("alex" + latitude)
-    console.log("alex" + longitude)
-
-    restaurant();
-    console.log(latitude)
-    console.log(longitude)
 
 });
 
@@ -113,15 +92,14 @@ function wait() {
         console.log(response);
         // function that executes to display videos on the page
         onYouTubeIframeAPIReady(response.items[0].id.videoId, "recipes");
+        lngLat()
     })
 
     // Clears the iframe and resets the inputs
     player.destroy();
-    resetForm();
+    // resetForm();
 
 }
-
-var player;
 
 //This function creates a youtube object
 function onYouTubeIframeAPIReady(vidId, vidReady) {
@@ -145,7 +123,6 @@ function onPlayerReady(event) {
 }
 
 function stopVideo() {
-
     player.stopVideo();
     //Resets the input once the player is loaded
     resetForm();
@@ -155,41 +132,45 @@ function stopVideo() {
 function resetForm() {
     document.getElementById("search").value = "";
     document.getElementById("zip").value = "";
-
 }
 
 // calls google maps for the location coordinates
 function lngLat() {
-
     zip = $("#zip").val()
     $.ajax({
         url: "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:" + zip + "&sensor=false&key=AIzaSyA6N-1it5aWPiccey5v0jP30BI9HAlZVME",
         method: "GET",
     }).then(function (data) {
-        latitude = data.results[0].geometry.location.lat;
-        longitude = data.results[0].geometry.location.lng;
-
-    }
-    )
+        latitude = data.results[0].geometry.location.lat.toFixed(2);
+        longitude = data.results[0].geometry.location.lng.toFixed(2);
+        restaurant(latitude, longitude);
+    })
 };
 
-function restaurant() {
-
+function restaurant(lat, lng) {
     // call google api to search for resturants
-    $("#restaurants").empty();
     var input = $("#search").val().trim();
+    $("#restaurants").empty();
     console.log(input);
-    var apiKey = "&key=AIzaSyC-eggb7gTlK5ThaxuAyyXs6jqXZ92fXk0";
-    var queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=restaurant&keyword=" + input + apiKey + "&location=" + latitude + "," + longitude + "&radius=2000"
-    console.log(queryURL);
+    // var apiKey = "&key=AIzaSyAu8NcOLpw_ueSUa6w_oE8_rv76uOln-EA";
+    var qrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=restaurant&keyword=" + input + "&key=AIzaSyAu8NcOLpw_ueSUa6w_oE8_rv76uOln-EA&location=" + lat + "," + lng + "&radius=10000"
+    console.log(qrl)
+
     $.ajax({
-        url: queryURL,
+        url: qrl,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
+        console.log(response)
+        console.log(response.results[0].name);
         // function that executes to display videos on the page
-        // $("#restaurants").text(response[0].name)
-
-        lngLat(response[0].name, "restaurants")
+        if (response.results.length) {
+            response.results.forEach((place, i) => {
+                if (i < 5) {
+                    $("#restaurants").append(`<p>${place.name}</p><p>${place.vicinity}</p>`)
+                } else {
+                    return
+                }
+            });
+        }
     })
 }
