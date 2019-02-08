@@ -36,6 +36,7 @@ div.container {
     font-weight: bold;
     font-size: 18px;
     font-family: 'Lato', sans-serif;
+    text-transform: none;
 }
 
 p{
