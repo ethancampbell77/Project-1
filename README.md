@@ -17,4 +17,5 @@ Deployment: Firebase
 
 Authors: Kiran, Alex, Katy, Ethan 
 
+Note: Please add CORS extension to the chrome and add the url https://maps.googleapis.com/* to the'Intercecpted URLs and URL patterns and delete '*://*/*'
 

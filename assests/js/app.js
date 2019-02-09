@@ -21,7 +21,10 @@ var database = firebase.database();
 
 $(document).ready(function () {
 
-    database.ref("/recipes").on("child_added", function (childSnapshot) {
+    database.ref("/recipes").orderByChild("search").limitToLast(5).on("child_added", function (childSnapshot) {
+
+        //Remove the 5th item in the table when something changes in the DB
+        $("#resultsTable tr:nth-child(5)").remove();
         // log the values
         console.log("Search Term: " + childSnapshot.val().search);
         console.log("Zip: " + childSnapshot.val().zip);
@@ -31,7 +34,7 @@ $(document).ready(function () {
         </a></td><td id='zip'>${childSnapshot.val().zip}</td></tr>`
         );
         // First 5 searches are presented in the table
-        $('table tr:gt(5)').hide();
+        // $('table tr:gt(5)').hide();
 
     }, function (errorObject) {
         console.log("Errors handled: " + errorObject.code);
@@ -151,6 +154,7 @@ function restaurant(lat, lng) {
             response.results.forEach((place, i) => {
                 if (i < 5) {
                     $("#restaurants").append(`<p class="pname">${place.name}</p><p>${place.vicinity}</p>`);
+
                 } else {
                     return;
                 }
