@@ -13,7 +13,7 @@ Google Fonts
 
 Database: Firebase
 
-Deployment: Firebase
+Deployment: Firebase - https://krave-project1.firebaseapp.com/
 
 Authors: Kiran, Alex, Katy, Ethan 
 
